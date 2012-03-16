@@ -25,7 +25,7 @@ class Less_Core
 		}
 		
 		// No any less file to compile
-		if (empty($array)) return self::_html_comment('no less files');
+		if (empty($array)) return self::_htmlComment('no less files');
 
 		// Validate less files
 		$stylesheets = self::_validateLessFilesList($array);
@@ -47,6 +47,16 @@ class Less_Core
 	}
 
 	/**
+	 * Add commented error
+	 * @param String $message
+	 * @return String
+	 */
+	protected static function _htmlComment($message)
+	{
+		return '<-- '.$message.' //-->';
+	}
+	
+	/**
 	 * Check less files 
 	 * @param Array $files
 	 */
@@ -67,12 +77,12 @@ class Less_Core
 			}
 			else
 			{
-				array_push($assets, self::_html_comment('could not find '.Debug::path($file).self::$ext));
+				array_push($assets, self::_htmlComment('could not find '.Debug::path($file).self::$ext));
 			}
 		}
 		
 		// There is no valid less file
-		if ( ! count($stylesheets)) return self::_html_comment('all less files are invalid');
+		if ( ! count($stylesheets)) return self::_htmlComment('all less files are invalid');
 		
 		return $stylesheets;
 	}
